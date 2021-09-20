@@ -1,17 +1,12 @@
-import java.util.*;
-import java.io.*;
+import javax.swing.JOptionPane;
 public class simpleRPG
 {
    public static void main(String[] args)
    {
-      Scanner kb = new Scanner(System.in);
-      
-      System.out.println("Battle increasingly difficult monsters to level up!\nIt's up to you to win!");
-      System.out.println("What's your character's name?");
-      String str0 = kb.nextLine();
-      System.out.println("What's your rival's name?");
-      String str1 = kb.nextLine();
-      System.out.println("Here's your initial stats");
+      JOptionPane.showMessageDialog(null, "Battle increasingly difficult monsters to level up!\nIt's up to you to win!");
+      String str0 = JOptionPane.showInputDialog("What's your character's name?");
+      String str1 = JOptionPane.showInputDialog("What's your rival's name?");
+      JOptionPane.showMessageDialog(null, "Here's your initial stats");
       double hp = 10.0;
       int lvl = 0;
       int xp = 0;
@@ -24,7 +19,7 @@ public class simpleRPG
      
       while (hp1>0 && hp!=0)
       {
-         System.out.println(str1+"'s hp is "+hp1+" and your hp is "+hp+".\nPlease select your move: (1) or (2)");
+         JOptionPane.showMessageDialog(null, str1+"'s hp is "+hp1+" and your hp is "+hp+".\nPlease select your move: (1) or (2)");
          int move = kb.nextInt();
          if (move == 1)
          {
@@ -48,7 +43,7 @@ public class simpleRPG
       }
       if (hp1==0)
       {
-         System.out.println("Congratulations! You beat "+str1+". On to the next!");
+         JOptionPane.showMessageDialog(null, "Congratulations! You beat "+str1+". On to the next!");
          xp = xp + 10;
       }
       if (xp==30)
@@ -57,7 +52,7 @@ public class simpleRPG
       }
       if (hp==0) 
       {
-         System.out.println("Oops! Start again!");
+         JOptionPane.showMessageDialog(null, "Oops! Start again!");
       }     
    }
 }
