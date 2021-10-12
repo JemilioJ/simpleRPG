@@ -2,14 +2,23 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.lang.Math;
-public class RPG_Main 
+public class pokemonBattle 
 {
+
    public static void main(String [] args) 
    {
       int repeat = 0;
+      int bet = 0;
+      double account = 0;
    //Creates the player's object, has the player battle the computer in a loop, and determines the winner afterwards.
       while(repeat==0){
-         CPU cpu1 = getOpponentInfo();
+      double money = 0;
+         bet = JOptionPane.showConfirmDialog(null, "Would you like to make a bet?");
+         if(bet == JOptionPane.YES_OPTION)
+         {
+            money = Double.parseDouble(JOptionPane.showInputDialog("How much money will you bet?"));
+         }
+         Player cpu1 = getOpponentInfo();
          Player p1 = getPlayerChoice();
          int cpuHP = cpu1.getHP();
          int playerHP = p1.getHP();
@@ -17,11 +26,31 @@ public class RPG_Main
          repeat = battle(p1, cpu1, cpuHP, playerHP);
          if(repeat==1)
          {
+            account -= money;
+            if(account < 0){
+            JOptionPane.showMessageDialog(null, "Better luck next time!\nYou're in debt by $"+String.format("%.2f", ((-1)*account)));
+            }
+            else if(account > 0){
+             JOptionPane.showMessageDialog(null, "Better luck next time!\nYou lost $"+String.format("%.2f", (money))+", but still have $"+String.format("%.2f", (account))+" left.");
+            }
+            else{
             JOptionPane.showMessageDialog(null, "Better luck next time!");
+            }
+            
          }
          if(repeat==2)
          {
-            JOptionPane.showMessageDialog(null, "Congratulations! You win!");
+            account += money;
+           
+            if(account < 0){
+            JOptionPane.showMessageDialog(null, "Congratulations! You win!\nYou're still in debt by $"+String.format("%.2f", ((-1)*account))+", however.");
+            }
+            else if(account > 0){
+             JOptionPane.showMessageDialog(null, "Congratulations! You win!\nYou made $"+String.format("%.2f", (money))+", and now have $"+String.format("%.2f", (account))+" in your account.");
+            }
+            else{
+             JOptionPane.showMessageDialog(null, "Congratulations! You win!");
+            }
          }
          
          int again = JOptionPane.showConfirmDialog(null, "Will you play again?");
@@ -41,7 +70,7 @@ public class RPG_Main
       Player aPlayer = new Player();
       String name = "";
       String type = "";
-      int hp = aPlayer.setHP(30);
+      int hp = aPlayer.setHP(40);
       String mv1 = aPlayer.setMV1("Scratch");
       String mv2 = "";
    
@@ -95,12 +124,12 @@ public class RPG_Main
       return aPlayer;
    }
    
-   public static CPU getOpponentInfo() //choose what Pokemon you want, name it, and you're ready.
+   public static Player getOpponentInfo() //choose what Pokemon you want, name it, and you're ready.
    {
-      CPU cpu = new CPU();
+      Player cpu = new Player();
       String name = "";
       String type = "";
-      int hp = cpu.setHP(30);
+      int hp = cpu.setHP(40);
       String mv1 = cpu.setMV1("Scratch");
       String mv2 = "";
       int x = (int)(Math.random()*2)+1;
@@ -123,7 +152,7 @@ public class RPG_Main
       return cpu;
    }
    
-   public static int battle(Player p1, CPU cpu, int cpuHP, int playerHP)
+   public static int battle(Player p1, Player cpu, int cpuHP, int playerHP)
    {
       int outcome = 0;
       do{
@@ -137,14 +166,22 @@ public class RPG_Main
          if(cpuMove == 1)
          {
             y=1;
-            cpuHP = playerMove(p1, cpu, cpuHP, x, y);//cpu moves first
-            playerHP = cpuMove(p1, cpu, playerHP, y);                  
+            if(playerHP > 0 && cpuHP > 0){
+               cpuHP = playerMove(p1, cpu, cpuHP, x, y);//cpu moves first
+            }
+            if(playerHP > 0 && cpuHP > 0){
+               playerHP = cpuMove(p1, cpu, playerHP, y);  
+            }               
          }
          if(cpuMove == 2)
          {
             y=2;
-            playerHP = cpuMove(p1, cpu, playerHP, y); 
-            cpuHP = playerMove(p1, cpu, cpuHP, x, y);
+            if(playerHP > 0 && cpuHP > 0){
+               playerHP = cpuMove(p1, cpu, playerHP, y); 
+            }
+            if(playerHP > 0 && cpuHP > 0){
+               cpuHP = playerMove(p1, cpu, cpuHP, x, y);
+            }
          }
          
          if(cpuHP <= 0){//if the opponent loses, outcome is one value
@@ -159,7 +196,7 @@ public class RPG_Main
       return outcome;
    }
    
-   public static int playerMove(Player p1, CPU cpu, int cpuHP, int x, int cpuMove){
+   public static int playerMove(Player p1, Player cpu, int cpuHP, int x, int cpuMove){
       int accuracy = (int)(Math.random()*99)+1;
       if(x==0){//The player chooses a standard scratch move
          if(accuracy<=95){
@@ -282,7 +319,7 @@ public class RPG_Main
       return cpuHP;
    }
    
-   public static int cpuMove(Player p1, CPU cpu, int playerHP, int cpuMove){
+   public static int cpuMove(Player p1, Player cpu, int playerHP, int cpuMove){
       int accuracy = (int)(Math.random()*99)+1;
       if(cpuMove==1)//Opponent chose tackle
       {
