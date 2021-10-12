@@ -47,7 +47,7 @@ public class RPG_Main
    
       Object[] options = {"Bulbasaur", "Charmander", "Squirtle"}; //bulbasaur is x=0, charmander is x=1, squirtle is x=2
       ImageIcon icon = new ImageIcon("[...]");
-      int x = JOptionPane.showOptionDialog(null, "Select your 1st Pokemon!"+"\n\n","", 
+      int x = JOptionPane.showOptionDialog(null, "Select your 1st Pokemon!"+"\n\n","Gotta catch 'em all!", 
          JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
       
       if(x==0){
