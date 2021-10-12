@@ -1,58 +1,71 @@
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-public class simpleRPG
+import javax.swing.JPanel;
+public class RPG_Main 
 {
-   public static void main(String[] args)
+
+   public static void main(String [] args) 
    {
-      JOptionPane.showMessageDialog(null, "Battle increasingly difficult monsters to level up!\nIt's up to you to win!");
-      String str0 = JOptionPane.showInputDialog("What's your character's name?");
-      String str1 = JOptionPane.showInputDialog("What's your rival's name?");
-      JOptionPane.showMessageDialog(null, "Here's your initial stats");
-      double hp = 10.0;
-      int lvl = 0;
-      int xp = 0;
-      int mv1 = 1;
-      int mv2 = 2;
-      
-      double hp1 = 10.0;
-      
-      double hpx = 1;
-     
-      while (hp1>0 && hp!=0)
-      {
-         JOptionPane.showMessageDialog(null, str1+"'s hp is "+hp1+" and your hp is "+hp+".\nPlease select your move: (1) or (2)");
-         int move = kb.nextInt();
-         if (move == 1)
-         {
-            hpx = (Math.random()*(2)+1)+1;
-            if(hpx==1)
-            {
-               hp=hp-hpx;
-            }
-            hp1=hp1-1;
-         }
-         if (move==2)
-         {
-            hpx = (Math.random()*(2)+1)+1;
-            
-            hp1=hp1-1;
-            if(hpx==2)
-            {
-               hp=hp-hpx;
-            }
-         }
-      }
-      if (hp1==0)
-      {
-         JOptionPane.showMessageDialog(null, "Congratulations! You beat "+str1+". On to the next!");
-         xp = xp + 10;
-      }
-      if (xp==30)
-      {
-         lvl++;
-      }
-      if (hp==0) 
-      {
-         JOptionPane.showMessageDialog(null, "Oops! Start again!");
-      }     
+   //Creates the player's object, has the player battle the computer in a loop, and determines the winner afterwards.
+   //Moves will have an accuracy percentage, so they can't always land, making the battle more interesting.
    }
+   
+   public static Player getPlayerChoice() //choose what Pokemon you want, name it, and you're ready.
+   {
+      Player aPlayer = new Player();
+      String name = "";
+      String type = "";
+      double hp = aPlayer.setHP(30);
+      String mv1 = aPlayer.setMV1("Scratch");
+      String mv2 = aPlayer.setMV2("Flamethrower");
+   
+      Object[] options = {"Bulbasaur", "Charmander", "Squirtle"}; //bulbasaur is x=0, charmander is x=1, squirtle is x=2
+      ImageIcon icon = new ImageIcon("[...]");
+      int x = JOptionPane.showOptionDialog(null, "Select your 1st Pokemon!"+"\nPlayer's Score is: "+pScore+"\nComputer's Score is: "+cScore,"Play Grass-Fire-Water!", 
+         JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+      
+      if(x==0){
+         int a = JOptionPane.showConfirmDialog("Would you like to name your Bulbasaur?");
+         if(a == JOptionPane.YES_OPTION){
+            name = aPlayer.setName(JOptionPane.showInputDialog("Enter its name: "));
+            while(name.equals("") || name == null){
+               name = aPlayer.setName(JOptionPane.showInputDialog("Enter a valid name: "));
+            } 
+         }
+         else{
+            name = aPlayer.setName("Bulbasaur");
+         }
+         type = aPlayer.setType("Grass");     
+      }
+      else if(x==1){
+         int b = JOptionPane.showConfirmDialog("Would you like to name your Charmander?");
+         if(b == JOptionPane.YES_OPTION){
+            name = aPlayer.setName(JOptionPane.showInputDialog("Enter its name: "));
+            while(name.equals("") || name == null){
+               name = aPlayer.setName(JOptionPane.showInputDialog("Enter a valid name: "));
+            } 
+         }
+         else{
+            name = aPlayer.setName("Charmander");
+         }
+         type = aPlayer.setType("Fire");  
+      }
+      else{
+         int c = JOptionPane.showConfirmDialog("Would you like to name your Squirtle?");
+         if(c == JOptionPane.YES_OPTION){
+            name = aPlayer.setName(JOptionPane.showInputDialog("Enter its name: "));
+            while(name.equals("") || name == null){
+               name = aPlayer.setName(JOptionPane.showInputDialog("Enter a valid name: "));
+            } 
+         }
+         else{
+            name = aPlayer.setName("Squirtle");
+         }
+         type = aPlayer.setType("Water");  
+      }
+      return aPlayer;
+   }
+   
+   
+   
 }
