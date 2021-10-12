@@ -1,18 +1,13 @@
 public class Player
 {
    private String name;
-   private double hp;
+   private int hp;
    private String type;
    private String mv1;
    private String mv2;
    
-   public Player(String name, String type, double hp, String mv1, String mv2)
+   public Player()
    {
-      this.name = name;
-      this.type = type;
-      this.hp = hp;
-      this.mv1 = mv2;
-      this.mv2 = mv1;
    }
    
    public String getName() 
@@ -25,7 +20,7 @@ public class Player
       return this.type;
    }
    
-   public double getHP() 
+   public int getHP() 
    {
       return this.hp;
    }
@@ -52,19 +47,22 @@ public class Player
       return type;
    }
    //______
-   public void setHP(double hp) 
+   public int setHP(int hp) 
    {
       this.hp = hp;
+      return hp;
    }
    
-   public void setMV1(String mv1) 
+   public String setMV1(String mv1) 
    {
       this.mv1 = mv1;
+      return mv1;
    }
    
-   public void setMV2(String mv2) 
+   public String setMV2(String mv2) 
    {
       this.mv2 = mv2;
+      return mv2;
    }
    //______
    public String getStats()
