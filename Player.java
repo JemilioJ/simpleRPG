@@ -2,19 +2,17 @@ public class Player
 {
    private String name;
    private double hp;
-   private int lvl;
-   private int xp;
+   private String type;
    private String mv1;
    private String mv2;
    
-   public Player(double hp, int lvl, int xp, String mv1, String mv2)
+   public Player(String name, String type, double hp, String mv1, String mv2)
    {
       this.name = name;
-      this.hp = 10.0;
-      this.lvl = 1;
-      this.xp = 0;
-      this.mv1 = "Scratch";
-      this.mv2 = "Growl";
+      this.type = type;
+      this.hp = hp;
+      this.mv1 = mv2;
+      this.mv2 = mv1;
    }
    
    public String getName() 
@@ -22,24 +20,19 @@ public class Player
       return this.name;
    }
    
+   public String getType() 
+   {
+      return this.type;
+   }
+   
    public double getHP() 
    {
       return this.hp;
    }
    
-   public int getlvl() 
-   {
-      return this.lvl;
-   }
-   
-   public int getXP() 
-   {
-      return this.xp;
-   }
-   
    public String getMV1() 
    {
-      return this.name;
+      return this.mv1;
    }
    
    public String getMV2() 
@@ -48,32 +41,20 @@ public class Player
    }
    
    
-   public boolean setName(String name) 
+   public String setName(String name) 
    {
-      if (!name.equals("")) 
-      {
-         this.name = name;
-         return true;
-      }
-      else {
-         return false;
-      }
-   
+      this.name = name;
+      return name;
+   }
+   public String setType(String type) 
+   {
+      this.type = type;
+      return type;
    }
    //______
    public void setHP(double hp) 
    {
       this.hp = hp;
-   }
-   
-   public void setlvl(int lvl) 
-   {
-      this.lvl = lvl;
-   }
-   
-   public void setXP(int xp) 
-   {
-      this.xp = xp;
    }
    
    public void setMV1(String mv1) 
@@ -90,8 +71,6 @@ public class Player
    {
       return "Player's name: "+this.getName()+"\n"+
              "HP: "+this.getHP()+"\n"+
-             "XP: "+this.getXP()+"\n"+
-             "Level: "+this.getlvl()+"\n"+
              "Moves: "+this.getMV1()+", "+this.getMV2();
    }
    
